@@ -1,0 +1,12 @@
+{
+  "name": "summerboard",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "*",
+    "lodash": "*",
+    "backbone": "*",
+    "bootstrap": "*",
+    "font-awesome": "*",
+    "less-elements": "*"
+  }
+}

@@ -1,0 +1,7 @@
+# vim editing
+*.swp
+.tern-port
+
+# node_modules and bower_components
+node_modules
+bower_components

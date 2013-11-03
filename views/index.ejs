@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <!-- jquery, bootstrap, font-awesome, lodash, backbone -->
+    <script type="text/javascript" src="jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+    <script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+    <script type="text/javascript" src="lodash/dist/lodash.underscore.min.js"></script>
+    <script type="text/javascript" src="backbone/backbone-min.js"></script>
+  </head>
+  <body>
+  <header>
+    <!-- gnb: navbar -->
+    <div class="gnb navbar navbar-inverse navbar-static-top" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><i class="fa fa-clipboard"></i>&nbsp;Summerboard</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
+        <form class="navbar-form navbar-left" role="search">
+          <div class="search input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <span type="submit" class="input-group-addon"><i class="fa fa-search"></i></span>
+          </div>
+        </form>
+        <ul class="nav navbar-nav">
+          <li><a href="#"><i class="fa fa-question-circle"></i>&nbsp;Help</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><i class="fa fa-bell"></i>&nbsp;Notification</a></li>
+          <li><a href="#"><i class="fa fa-clipboard"></i>&nbsp;Board</a></li>
+          <li><img class="account img-rounded" src="http://www.gravatar.com/avatar/47236e140589881bbadb777a44340140.png" alt="" /></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </header>
+  <div class="content">
+    <!-- lnb: navbar -->
+    <div class="lnb navbar navbar-default navbar-static-top" role="title">
+      <p class="board-title navbar-text">Summernote</p>
+      <ul class="nav navbar-nav">
+        <li><a href="#">Weekend Rush</a></li>
+        <li><a href="#"><i class="fa fa-pencil"></i></a></li>
+        <li><a href="#"><i class="fa fa-group"></i>&nbsp;Org Visible</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><i class="fa fa-arrow-left"></i>&nbsp;Show sidebar</a></li>
+      </ul>
+    </div>
+    <!-- board -->
+    <div class="board">
+      <div class="list panel panel-list">
+        <div class="list-header panel-heading"><h3 class="panel-title">To Do</h3></div>
+        <div class="list-body">
+          <div class="list-card-area">
+            <!-- list-card -->
+            <div class="list-card">
+              <div class="list-card-labels"></div>
+              <div class="list-card-detail">
+                <div class="list-card-title">Bootstrap v0.3 지원</div>
+                <div class="list-card-badge btn-toolbar">
+                  <button class="btn btn-xs"><i class="fa fa-eye"></i></button>
+                  <button class="btn btn-xs"><i class="fa fa-comment"></i></button>
+                  <button class="btn btn-xs"><i class="fa fa-list-ul"></i>&nbsp; 1/4</button>
+                  <button class="btn btn-xs"><i class="fa fa-paperclip"></i></button>
+                </div>
+              </div>
+            </div>
+            <div class="list-card">
+              <div class="list-card-labels"></div>
+              <div class="list-card-detail">
+                <div class="list-card-title">IE8+ 지원</div>
+                <div class="list-card-badge btn-toolbar">
+                  <button class="btn btn-xs"><i class="fa fa-comment"></i></button>
+                  <button class="btn btn-xs"><i class="fa fa-eye"></i></button>
+                  <button class="btn btn-xs"><i class="fa fa-list-ul"></i>&nbsp; 1/4</button>
+                </div>
+              </div>
+            </div>
+            <div class="list-card">
+              <div class="list-card-labels"></div>
+              <div class="list-card-detail">
+                <div class="list-card-title">Chrome Drag&Drop 지원</div>
+                <div class="list-card-badge btn-toolbar">
+                  <button class="btn btn-xs"><i class="fa fa-comment"></i></button>
+                  <button class="btn btn-xs"><i class="fa fa-eye"></i></button>
+                  <button class="btn btn-xs"><i class="fa fa-list-ul"></i>&nbsp; 1/4</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-add-card">Add a card...</div>
+        </div>
+      </div>
+      <div class="list panel panel-list">
+        <div class="list-header panel-heading"><h3 class="panel-title">Doing</h3></div>
+        <div class="list-body">
+          <div class="list-card-area"></div>
+          <div class="list-add-card">Add a card...</div>
+        </div>
+      </div>
+      <div class="list panel panel-list">
+        <div class="list-header panel-heading"><h3 class="panel-title">Done</h3></div>
+        <div class="list-body">
+          <div class="list-card-area"></div>
+          <div class="list-add-card">Add a card...</div>
+        </div>
+      </div>
+      <div class="list panel panel-list panel-add-list">
+        <div class="list-body">
+          <div class="list-add-list">Add a list...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+@import "../../bower_components/less-elements/elements.less";
+
+/* Variables
+ -------------------------------- */
+@strong-font: black;
+
+/* Layout
+ -------------------------------- */
+header {
+  .gnb.navbar {
+    div.search {
+      width: 200px;
+    }
+
+    li img.account {
+      margin: 10px;
+      width: 30px;
+    }
+    margin-bottom: 0;
+  }
+}
+
+.content {
+  background-color: gray;
+  width: 100%;
+  /* compute width according to window size */
+  height: 500px;
+
+  .lnb.navbar {
+    p.board-title {
+      color: @strong-font;
+      font-weight: bold;
+    }
+  }
+  .board {
+    overflow-x: auto;
+    .list {
+      @list-bg: #ddd;
+      float: left;
+      position: relative;
+      margin-left: 10px;
+      min-width: 250px;
+
+      &.panel-list {
+        background-color: @list-bg;
+
+        /* list-card-area */
+        .list-card-area {
+          margin: 5px;
+          .list-card {
+            width: 100%;
+            .rounded(4px);
+            border: 1px solid gray;
+            background-color: white;
+            margin-bottom: 10px;
+            .list-card-title {
+              margin: 10px;
+            }
+            .list-card-badge {
+              margin: 10px;
+              button {
+                color: gray;
+              }
+            }
+            &:hover {
+              cursor: pointer;
+              border-color: green;
+            }
+          }
+        }
+
+        /* list-add-card btn and list-add-list btn */
+        .list-add-card, .list-add-list {
+          padding: 5px;
+          color: gray;
+          &:hover {
+            background-color: darken(@list-bg, 10%);
+            cursor: pointer;
+          }
+        }
+      }
+      &.panel-add-list {
+        opacity: 0.8;
+      }
+    }
+  }
+}
