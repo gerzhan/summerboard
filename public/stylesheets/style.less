@@ -3,11 +3,13 @@
 /* Variables
  -------------------------------- */
 @strong-font: black;
+@accent: black;
 
 /* Layout
  -------------------------------- */
 header {
   .gnb.navbar {
+    background-color: @accent;
     div.search {
       width: 200px;
     }
@@ -21,10 +23,10 @@ header {
 }
 
 .content {
-  background-color: gray;
+  background-color: lighten(@accent, 20%);
   width: 100%;
   /* compute width according to window size */
-  height: 500px;
+  height: 750px;
 
   .lnb.navbar {
     p.board-title {
@@ -39,13 +41,15 @@ header {
       float: left;
       position: relative;
       margin-left: 10px;
-      min-width: 250px;
+      min-width: 300px;
 
       &.panel-list {
         background-color: @list-bg;
+        border: none;
 
         /* list-card-area */
         .list-card-area {
+          min-height: 30px;
           margin: 5px;
           .list-card {
             width: 100%;
@@ -62,9 +66,18 @@ header {
                 color: gray;
               }
             }
+
             &:hover {
               cursor: pointer;
               border-color: green;
+            }
+
+            &.list-card-placeholder {
+              background-color: lighten(@accent, 60%);
+              height: 70px;
+            }
+            &.list-card-ondrag {
+              .rotation(5deg);
             }
           }
         }
@@ -76,11 +89,12 @@ header {
           &:hover {
             background-color: darken(@list-bg, 10%);
             cursor: pointer;
+            .rounded(5px);
           }
         }
       }
       &.panel-add-list {
-        opacity: 0.8;
+        opacity: 0.6;
       }
     }
   }
