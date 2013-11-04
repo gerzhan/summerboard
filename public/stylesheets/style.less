@@ -25,9 +25,6 @@ header {
 .content {
   background-color: lighten(@accent, 20%);
   width: 100%;
-  /* compute width according to window size */
-  height: 750px;
-
   .lnb.navbar {
     p.board-title {
       color: @strong-font;
@@ -35,6 +32,8 @@ header {
     }
   }
   .board {
+    /* compute width according to window size */
+    height: 750px;
     overflow-x: auto;
     .list {
       @list-bg: #ddd;
@@ -76,9 +75,9 @@ header {
               background-color: lighten(@accent, 60%);
               height: 70px;
             }
-            &.list-card-ondrag {
-              .rotation(5deg);
-            }
+          }
+          .list-card-ondrag {
+            .rotation(5deg);
           }
         }
 

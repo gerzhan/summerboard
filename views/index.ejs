@@ -6,7 +6,7 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 
-    <!-- libs: jquery, bootstrap, font-awesome, lodash, backbone -->
+    <!-- libs: jquery, bootstrap, font-awesome, lodash, backbone, mustache -->
     <script type="text/javascript" src="jquery/jquery.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
     <script type="text/javascript" src="lodash/dist/lodash.underscore.min.js"></script>
     <script type="text/javascript" src="backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="mustache/mustache.js"></script>
+
     <!-- board -->
     <script type="text/javascript" src="javascripts/board.js"></script>
   </head>
@@ -64,47 +66,11 @@
       </ul>
     </div>
     <!-- board -->
-    <div class="board">
-      <div class="list panel panel-list">
+    <div id="board" class="board">
+      <div id="todoList" class="list panel panel-list">
         <div class="list-header panel-heading"><h3 class="panel-title">To Do</h3></div>
         <div class="list-body">
-          <div class="list-card-area">
-            <!-- list-card -->
-            <div class="list-card">
-              <div class="list-card-labels"></div>
-              <div class="list-card-detail">
-                <div class="list-card-title">Bootstrap v0.3 지원</div>
-                <div class="list-card-badge btn-toolbar">
-                  <button class="btn btn-xs"><i class="fa fa-eye"></i></button>
-                  <button class="btn btn-xs"><i class="fa fa-comment"></i></button>
-                  <button class="btn btn-xs"><i class="fa fa-list-ul"></i>&nbsp; 1/4</button>
-                  <button class="btn btn-xs"><i class="fa fa-paperclip"></i></button>
-                </div>
-              </div>
-            </div>
-            <div class="list-card">
-              <div class="list-card-labels"></div>
-              <div class="list-card-detail">
-                <div class="list-card-title">IE8+ 지원</div>
-                <div class="list-card-badge btn-toolbar">
-                  <button class="btn btn-xs"><i class="fa fa-comment"></i></button>
-                  <button class="btn btn-xs"><i class="fa fa-eye"></i></button>
-                  <button class="btn btn-xs"><i class="fa fa-list-ul"></i>&nbsp; 1/4</button>
-                </div>
-              </div>
-            </div>
-            <div class="list-card">
-              <div class="list-card-labels"></div>
-              <div class="list-card-detail">
-                <div class="list-card-title">Chrome Drag&Drop 지원</div>
-                <div class="list-card-badge btn-toolbar">
-                  <button class="btn btn-xs"><i class="fa fa-comment"></i></button>
-                  <button class="btn btn-xs"><i class="fa fa-eye"></i></button>
-                  <button class="btn btn-xs"><i class="fa fa-list-ul"></i>&nbsp; 1/4</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="list-card-area"></div>
           <div class="list-add-card">Add a card...</div>
         </div>
       </div>
@@ -129,6 +95,21 @@
       </div>
     </div>
   </div>
-</div>
+  <!-- template -->
+  <script type="text/template" id="cardTemplate">
+    <div class="list-card">
+      <div class="list-card-labels"></div>
+      <div class="list-card-detail">
+        <div class="list-card-title">{{title}}</div>
+        <div class="list-card-badge btn-toolbar">
+          <button class="btn btn-xs"><i class="fa fa-eye"></i></button>
+          <button class="btn btn-xs"><i class="fa fa-comment"></i></button>
+          <button class="btn btn-xs"><i class="fa fa-list-ul"></i>&nbsp; 1/4</button>
+          <button class="btn btn-xs"><i class="fa fa-paperclip"></i></button>
+        </div>
+      </div>
+    </div>
+  </script>
+
 </body>
 </html>

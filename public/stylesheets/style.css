@@ -22,15 +22,15 @@ header .gnb.navbar li img.account {
 .content {
   background-color: #333333;
   width: 100%;
-  /* compute width according to window size */
-
-  height: 750px;
 }
 .content .lnb.navbar p.board-title {
   color: #000000;
   font-weight: bold;
 }
 .content .board {
+  /* compute width according to window size */
+
+  height: 750px;
   overflow-x: auto;
 }
 .content .board .list {
@@ -77,7 +77,7 @@ header .gnb.navbar li img.account {
   background-color: #999999;
   height: 70px;
 }
-.content .board .list.panel-list .list-card-area .list-card.list-card-ondrag {
+.content .board .list.panel-list .list-card-area .list-card-ondrag {
   -webkit-transform: rotate(5deg);
   -moz-transform: rotate(5deg);
   -o-transform: rotate(5deg);
