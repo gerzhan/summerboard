@@ -93,9 +93,10 @@ header .gnb.navbar li img.account {
   background-color: #999999;
   height: 70px;
 }
-.content .board .list.panel-list .list-card-area .card-composer textarea.card-title {
+.content .board .list.panel-list .list-card-area .card-composer textarea.card-composer-title {
   width: 100%;
   height: 54px;
+  padding: 10px;
   background: none;
   border: none;
   -webkit-box-shadow: none;

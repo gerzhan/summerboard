@@ -41,9 +41,14 @@ $(function() {
   var cardList = new CardList();
 
   var CardListView = Backbone.View.extend({
-    el: $('#board'),
-    events: {},
+    el: $('#todoList'),
+    cardComposerTemplate: $('#cardComposerTemplate').html(),
+    events: {
+      "click .list-add-card": "showCardComposer",
+      "blur .card-composer-title": "hideCardComposer",
+    },
     initialize: function() {
+      this.addCardBtn = $(this.el).find('.list-add-card');
       this.listenTo(cardList, 'reset', this.addAllCard);
       cardList.fetch({reset: true});
     },
@@ -52,7 +57,21 @@ $(function() {
     },
     addCard: function(card) {
       var cardView = new CardView({model: card});
-      this.$('#todoList .list-card-area').append(cardView.render().el);
+      this.$('.list-card-area').append(cardView.render().el);
+    },
+    showCardComposer: function() {
+      if (!this.composer) {
+        this.composer = $(this.cardComposerTemplate);
+        this.$('.list-card-area').append(this.composer);
+      } else {
+        this.composer.removeClass('hide');
+      }
+      this.composer.find('textarea').focus();
+      this.addCardBtn.addClass('hide');
+    },
+    hideCardComposer: function() {
+      this.composer.addClass('hide');
+      this.addCardBtn.removeClass('hide');
     }
   });
 
