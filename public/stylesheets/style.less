@@ -35,6 +35,12 @@ header {
     /* compute width according to window size */
     height: 750px;
     overflow-x: auto;
+
+    /* drag effect */
+    .ondrag {
+      .rotation(5deg);
+    }
+
     .list {
       @list-bg: #ddd;
       float: left;
@@ -50,16 +56,22 @@ header {
         .list-card-area {
           min-height: 30px;
           margin: 5px;
-          .list-card {
+
+          /* common card and card-composer */
+          .card, .card-composer {
             width: 100%;
             .rounded(4px);
             border: 1px solid gray;
             background-color: white;
             margin-bottom: 10px;
-            .list-card-title {
+          }
+
+          /* card */
+          .card {
+            .card-title {
               margin: 10px;
             }
-            .list-card-badge {
+            .card-badge {
               margin: 10px;
               button {
                 color: gray;
@@ -71,20 +83,44 @@ header {
               border-color: green;
             }
 
-            &.list-card-placeholder {
+            &.card-placeholder {
               background-color: lighten(@accent, 60%);
               height: 70px;
             }
           }
-          .list-card-ondrag {
-            .rotation(5deg);
+
+          /* card-composer */
+          .card-composer {
+            textarea.card-title {
+              width: 100%;
+              height: 54px;
+              background: none;
+              border: none;
+              .box-shadow(none);
+              resize: vertical;
+              overflow-y: auto;
+            }
           }
+
+          .card-control {
+            .btn-cancel {
+              font-size: 18px;
+              color: gray;
+              &:hover {
+                color: black;
+              }
+            }
+          }
+
         }
 
         /* list-add-card btn and list-add-list btn */
         .list-add-card, .list-add-list {
           padding: 5px;
           color: gray;
+          &.hide {
+            display: none;
+          }
           &:hover {
             background-color: darken(@list-bg, 10%);
             cursor: pointer;

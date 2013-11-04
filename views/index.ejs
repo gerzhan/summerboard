@@ -84,7 +84,9 @@
       <div class="list panel panel-list">
         <div class="list-header panel-heading"><h3 class="panel-title">Done</h3></div>
         <div class="list-body">
-          <div class="list-card-area"></div>
+          <div class="list-card-area">
+
+          </div>
           <div class="list-add-card">Add a card...</div>
         </div>
       </div>
@@ -95,13 +97,26 @@
       </div>
     </div>
   </div>
-  <!-- template -->
+  <!-- card composer -->
+  <script type="text/template" id="cardComposerTemplate">
+    <div class="card-composer">
+      <div class="card-labels"></div>
+      <div class="card-detail">
+        <textarea class="card-title"></textarea>
+      </div>
+    </div>
+    <div class="card-control">
+      <button class="btn btn-success">Add</button>
+      <a class="btn btn-cancel"><i class="fa fa-times"></i></a>
+    </div>
+  </script>
+  <!-- card -->
   <script type="text/template" id="cardTemplate">
-    <div class="list-card">
-      <div class="list-card-labels"></div>
-      <div class="list-card-detail">
-        <div class="list-card-title">{{title}}</div>
-        <div class="list-card-badge btn-toolbar">
+    <div class="card">
+      <div class="card-labels"></div>
+      <div class="card-detail">
+        <div class="card-title">{{title}}</div>
+        <div class="card-badge btn-toolbar">
           <button class="btn btn-xs"><i class="fa fa-eye"></i></button>
           <button class="btn btn-xs"><i class="fa fa-comment"></i></button>
           <button class="btn btn-xs"><i class="fa fa-list-ul"></i>&nbsp; 1/4</button>
@@ -110,6 +125,5 @@
       </div>
     </div>
   </script>
-
 </body>
 </html>

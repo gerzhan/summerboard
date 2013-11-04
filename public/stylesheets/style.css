@@ -32,6 +32,15 @@ header .gnb.navbar li img.account {
 
   height: 750px;
   overflow-x: auto;
+  /* drag effect */
+
+}
+.content .board .ondrag {
+  -webkit-transform: rotate(5deg);
+  -moz-transform: rotate(5deg);
+  -o-transform: rotate(5deg);
+  -ms-transform: rotate(5deg);
+  transform: rotate(5deg);
 }
 .content .board .list {
   float: left;
@@ -50,8 +59,15 @@ header .gnb.navbar li img.account {
 .content .board .list.panel-list .list-card-area {
   min-height: 30px;
   margin: 5px;
+  /* common card and card-composer */
+
+  /* card */
+
+  /* card-composer */
+
 }
-.content .board .list.panel-list .list-card-area .list-card {
+.content .board .list.panel-list .list-card-area .card,
+.content .board .list.panel-list .list-card-area .card-composer {
   width: 100%;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -60,34 +76,49 @@ header .gnb.navbar li img.account {
   background-color: white;
   margin-bottom: 10px;
 }
-.content .board .list.panel-list .list-card-area .list-card .list-card-title {
+.content .board .list.panel-list .list-card-area .card .card-title {
   margin: 10px;
 }
-.content .board .list.panel-list .list-card-area .list-card .list-card-badge {
+.content .board .list.panel-list .list-card-area .card .card-badge {
   margin: 10px;
 }
-.content .board .list.panel-list .list-card-area .list-card .list-card-badge button {
+.content .board .list.panel-list .list-card-area .card .card-badge button {
   color: gray;
 }
-.content .board .list.panel-list .list-card-area .list-card:hover {
+.content .board .list.panel-list .list-card-area .card:hover {
   cursor: pointer;
   border-color: green;
 }
-.content .board .list.panel-list .list-card-area .list-card.list-card-placeholder {
+.content .board .list.panel-list .list-card-area .card.card-placeholder {
   background-color: #999999;
   height: 70px;
 }
-.content .board .list.panel-list .list-card-area .list-card-ondrag {
-  -webkit-transform: rotate(5deg);
-  -moz-transform: rotate(5deg);
-  -o-transform: rotate(5deg);
-  -ms-transform: rotate(5deg);
-  transform: rotate(5deg);
+.content .board .list.panel-list .list-card-area .card-composer textarea.card-title {
+  width: 100%;
+  height: 54px;
+  background: none;
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: vertical;
+  overflow-y: auto;
+}
+.content .board .list.panel-list .list-card-area .card-control .btn-cancel {
+  font-size: 18px;
+  color: gray;
+}
+.content .board .list.panel-list .list-card-area .card-control .btn-cancel:hover {
+  color: black;
 }
 .content .board .list.panel-list .list-add-card,
 .content .board .list.panel-list .list-add-list {
   padding: 5px;
   color: gray;
+}
+.content .board .list.panel-list .list-add-card.hide,
+.content .board .list.panel-list .list-add-list.hide {
+  display: none;
 }
 .content .board .list.panel-list .list-add-card:hover,
 .content .board .list.panel-list .list-add-list:hover {
