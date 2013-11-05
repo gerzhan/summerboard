@@ -45,11 +45,17 @@ $(function() {
     cardComposerTemplate: $('#cardComposerTemplate').html(),
     events: {
       'click .list-add-card': 'showCardComposer',
-      'blur .card-composer-title': 'hideCardComposer',
-      'keypress .card-composer-title': 'enterCardComposer'
+      'click .card-control .btn-add': 'addCardComposer',
+      'click .card-control .btn-cancel': 'cancelCardComposer',
+      'keydown .card-composer-title': 'keydownCardComposer'
+      //'focusout .card-composer-title': 'hideCardComposer',
     },
     initialize: function() {
-      this.addCardBtn = $(this.el).find('.list-add-card');
+      var $el = $(this.el);
+      this.composer = $el.find('.list-card-composer');
+      this.composer.append($(this.cardComposerTemplate));
+      this.composerInput = this.composer.find('.card-composer-title');
+      this.addCardBtn = $el.find('.list-add-card');
 
       this.listenTo(cardList, 'add', this.addCard);
       this.listenTo(cardList, 'reset', this.addAllCard);
@@ -63,13 +69,9 @@ $(function() {
       var cardView = new CardView({model: card});
       this.$('.list-card-area').append(cardView.render().el);
     },
+    /* cardComposer */
     showCardComposer: function() {
-      if (!this.composer) {
-        this.composer = $(this.cardComposerTemplate);
-        this.$('.list-card-area').append(this.composer);
-      } else {
-        this.composer.removeClass('hide');
-      }
+      this.composer.removeClass('hide');
       this.composer.find('textarea').focus();
       this.addCardBtn.addClass('hide');
     },
@@ -77,14 +79,24 @@ $(function() {
       this.composer.addClass('hide');
       this.addCardBtn.removeClass('hide');
     },
-    enterCardComposer: function(e) {
-      if(e.keyCode == 13) { //enterkey press
-        var cardComposer = this.$('.card-composer-title');
-        cardList.create({title: cardComposer.val()});
-        cardComposer.val('');
-        cardComposer.focus();
-        e.preventDefault();
+    addCardComposer: function(e) {
+      if (this.composerInput.val()) {
+        cardList.create({title: this.composerInput.val()});
+        this.composerInput.val('').focus();
       }
+      e.preventDefault();
+    },
+    keydownCardComposer: function(e) {
+      if (e.keyCode == 13) {  // enter
+        this.addCardComposer(e);
+      } else if (e.keyCode == 27) { // esc
+        this.cancelCardComposer(e);
+      }
+    },
+    cancelCardComposer: function(e) {
+      this.composerInput.val('');
+      this.hideCardComposer();
+      e.preventDefault();
     }
   });
 
