@@ -30,7 +30,7 @@ $(function() {
   // CardList (List of Cards)
   var CardList = Backbone.Collection.extend({
     model: Card,
-    url: '/cardLists',
+    url: '/cards',
     nextOrder: function() {
       if (!this.length) return 1;
       return this.last().get('order') + 1;
@@ -44,12 +44,16 @@ $(function() {
     el: $('#todoList'),
     cardComposerTemplate: $('#cardComposerTemplate').html(),
     events: {
-      "click .list-add-card": "showCardComposer",
-      "blur .card-composer-title": "hideCardComposer",
+      'click .list-add-card': 'showCardComposer',
+      'blur .card-composer-title': 'hideCardComposer',
+      'keypress .card-composer-title': 'enterCardComposer'
     },
     initialize: function() {
       this.addCardBtn = $(this.el).find('.list-add-card');
+
+      this.listenTo(cardList, 'add', this.addCard);
       this.listenTo(cardList, 'reset', this.addAllCard);
+
       cardList.fetch({reset: true});
     },
     addAllCard: function() {
@@ -72,6 +76,15 @@ $(function() {
     hideCardComposer: function() {
       this.composer.addClass('hide');
       this.addCardBtn.removeClass('hide');
+    },
+    enterCardComposer: function(e) {
+      if(e.keyCode == 13) { //enterkey press
+        var cardComposer = this.$('.card-composer-title');
+        cardList.create({title: cardComposer.val()});
+        cardComposer.val('');
+        cardComposer.focus();
+        e.preventDefault();
+      }
     }
   });
 

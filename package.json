@@ -11,5 +11,8 @@
     "less-middleware": "*",
     "redis": "*",
     "socket.io": "*"
+  },
+  "devDependencies": {
+    "node-inspector": "*"
   }
 }

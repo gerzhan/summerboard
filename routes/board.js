@@ -1,22 +1,30 @@
+var cards = [{
+  title: 'Support Bootstrap v3.0.1',
+  members: [],
+  comments: [],
+  checklist: [],
+  attachments: []
+}, {
+  title: 'Support IE8+',
+  members: [],
+  comments: [],
+  checklist: [],
+  attachments: []
+}];
+
 /*
- * GET list of cardList.
+ * GET list of card.
  */
-exports.listCardList = function(req, res) {
+exports.listCard = function(req, res) {
   var boardId = req.boardId;
-  console.log('listCardList:' + boardId);
-  res.json([{
-    title: 'Support Bootstrap v3.0.1',
-    members: [],
-    comments: [],
-    checklist: [],
-    attachments: []
-  }, {
-    title: 'Support IE8+',
-    members: [],
-    comments: [],
-    checklist: [],
-    attachments: []
-  }]);
+  console.log('listCard:' + boardId);
+  res.json(cards);
+};
+
+exports.addCard = function(req, res) {
+  var card = req.body;
+  console.log('addCard:' + JSON.stringify(card));
+  cards.push(card);
 };
 
 /*
