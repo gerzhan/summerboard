@@ -1,5 +1,5 @@
 $(function() {
-  // Card
+  // Card Model
   var Card = Backbone.Model.extend({
     defaults: function() {
       return {
@@ -10,13 +10,19 @@ $(function() {
     }
   });
 
+  // Card View
   var CardView = Backbone.View.extend({
     tagName: 'div',
     template: $('#cardTemplate').html(),
-    events: { },
+    events: { 
+      'drop': 'drop'
+    },
     initialize: function() {
       this.listenTo(this.model, 'change', this.render);
       this.listenTo(this.model, 'change', this.remove);
+    },
+    drop: function(e, index) {
+      this.$el.trigger('updateOrder', [this.model, index]);
     },
     render: function() {
       this.$el.html(Mustache.to_html(this.template, this.model.toJSON()));
@@ -44,6 +50,7 @@ $(function() {
     el: $('#todoList'),
     cardComposerTemplate: $('#cardComposerTemplate').html(),
     events: {
+      'updateOrder': 'updateOrder',
       'click .list-add-card': 'showCardComposer',
       'click .card-control .btn-add': 'addCardComposer',
       'click .card-control .btn-cancel': 'cancelCardComposer',
@@ -62,12 +69,33 @@ $(function() {
 
       cardList.fetch({reset: true});
     },
+    repaint: function() {
+      this.$('.list-card-area').html('');
+      this.addAllCard();
+    },
     addAllCard: function() {
       cardList.each(this.addCard, this);
     },
     addCard: function(card) {
       var cardView = new CardView({model: card});
       this.$('.list-card-area').append(cardView.render().el);
+    },
+    updateOrder: function(e, model, position) {
+      cardList.remove(model);
+
+      cardList.each(function (model, index) {
+        var order = index;
+        if (index >= position)
+          order += 1;
+        model.set('order', order);
+      });            
+
+      model.set('order', position);
+      cardList.add(model, {at: position});
+      console.log(cardList.pluck('id'));
+
+      // to update orders on server:
+      this.repaint();
     },
     /* cardComposer */
     showCardComposer: function() {
@@ -114,6 +142,7 @@ $(document).ready(function() {
       $(ui.item).addClass('ondrag');
     },
     stop: function(e, ui) {
+      ui.item.trigger('drop', ui.item.index());
       $(ui.item).removeClass('ondrag');
     }
   }).disableSelection();
