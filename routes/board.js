@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 var cards = [{
   id: '9841680c-10e9-4db9-b16f-26ae3c9d8d43',
   title: 'Support Bootstrap v3.0.1',
@@ -30,11 +32,27 @@ exports.listCard = function(req, res) {
   res.json(cards);
 };
 
+/*
+ * POST card.
+ */
 exports.addCard = function(req, res) {
   var card = req.body;
   card.id = genUUID();
   console.log('addCard:' + JSON.stringify(card));
   cards.push(card);
+};
+
+/*
+ * PUT card.
+ */
+exports.updateCard = function(req, res) {
+  var updated = req.body;
+  console.log('updateCard:', updated.id, JSON.stringify(updated));
+  var idx = -1;
+  for (var i=0; i < cards.length; i++) {
+    if (cards[i].id == updated.id) { idx = i; break; }
+  }
+  if (idx != -1) cards[idx] = updated;
 };
 
 /*

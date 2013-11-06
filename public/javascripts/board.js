@@ -65,12 +65,12 @@ $(function() {
       this.addCardBtn = $el.find('.list-add-card');
 
       this.listenTo(cardList, 'add', this.addCard);
-      this.listenTo(cardList, 'reset', this.addAllCard);
+      this.listenTo(cardList, 'reset sort', this.repaint);
 
       cardList.fetch({reset: true});
     },
     repaint: function() {
-      this.$('.list-card-area').html('');
+      this.$('.list-card-area').empty();
       this.addAllCard();
     },
     addAllCard: function() {
@@ -92,7 +92,8 @@ $(function() {
 
       model.set('order', position);
       cardList.add(model, {at: position});
-      console.log(cardList.pluck('id'));
+      cardList.each(function(card) { card.save(); });
+      console.log(cardList.pluck('id'), cardList.pluck('order'));
 
       // to update orders on server:
       this.repaint();

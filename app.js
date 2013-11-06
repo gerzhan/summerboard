@@ -36,6 +36,7 @@ app.get('/boards', board.listBoard);
 
 app.get('/cards', board.listCard);
 app.post('/cards', board.addCard);
+app.put('/cards/:id', board.updateCard);
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

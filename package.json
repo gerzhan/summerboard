@@ -10,7 +10,8 @@
     "ejs": "*",
     "less-middleware": "*",
     "redis": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "lodash": "*"
   },
   "devDependencies": {
     "node-inspector": "*"
