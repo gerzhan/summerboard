@@ -68,6 +68,7 @@ app.get('/logout', function(req, res) {
 // pages
 app.get('/', routes.index);
 app.get('/boards', ensureAuthenticated, board.index);
+app.get('/boards/:id', ensureAuthenticated, board.board);
 
 // boards
 app.get('/cards', board.listCard);
