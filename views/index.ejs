@@ -17,7 +17,7 @@
     <script type="text/javascript" src="mustache/mustache.js"></script>
 
     <!-- board -->
-    <script type="text/javascript" src="javascripts/board.js"></script>
+    <script type="text/javascript" src="javascripts/index.js"></script>
   </head>
   <body>
   <header>
@@ -35,94 +35,56 @@
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
-        <form class="navbar-form navbar-left" role="search">
-          <div class="search input-group">
-            <input type="text" class="form-control" placeholder="Search">
-            <span type="submit" class="input-group-addon"><i class="fa fa-search"></i></span>
-          </div>
-        </form>
-        <ul class="nav navbar-nav">
-          <li><a href="#"><i class="fa fa-question-circle"></i>&nbsp;Help</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <!-- with user -->
+        <ul class="nav navbar-nav navbar-right" style="display:none;">
           <li><a href="#"><i class="fa fa-bell"></i>&nbsp;Notification</a></li>
           <li><a href="#"><i class="fa fa-clipboard"></i>&nbsp;Board</a></li>
           <li><img class="account img-rounded" src="http://www.gravatar.com/avatar/47236e140589881bbadb777a44340140.png" alt="" /></li>
         </ul>
+        <!-- without user -->
+        <ul class="nav navbar-nav navbar-right">
+          <li class="account-login dropdown">
+            <a href="#" class="account-login-btn dropdown-toggle" data-toggle="dropdown">Login</a>
+            <div class="account-login-dropdown dropdown-menu">
+              <p class="text-center">Log in</p>
+              <hr/>
+              <form action="/login" method="post">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                  <input name="username" type="text" class="form-control" placeholder="Username">
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                  <input name="password" type="password" class="form-control" placeholder="Password">
+                </div>
+                <input type="submit" class="btn btn-success pull-right" value="Log in">
+              </form>
+            </div>
+          </li>
+        </ul>
       </div><!-- /.navbar-collapse -->
     </div>
   </header>
-  <div class="content">
-    <!-- lnb: navbar -->
-    <div class="lnb navbar navbar-default navbar-static-top" role="title">
-      <p class="board-title navbar-text">Summernote</p>
-      <ul class="nav navbar-nav">
-        <li><a href="#">Weekend Rush</a></li>
-        <li><a href="#"><i class="fa fa-pencil"></i></a></li>
-        <li><a href="#"><i class="fa fa-group"></i>&nbsp;Org Visible</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><i class="fa fa-arrow-left"></i>&nbsp;Show sidebar</a></li>
-      </ul>
-    </div>
-    <!-- board -->
-    <div id="board" class="board">
-      <div id="todoList" class="list panel panel-list">
-        <div class="list-header panel-heading"><h3 class="panel-title">To Do</h3></div>
-        <div class="list-body">
-          <div class="list-card-area"></div>
-          <div class="list-card-composer hide"></div>
-          <div class="list-add-card">Add a card...</div>
-        </div>
+  <div class="jumbotron text-center">
+    <h1><i class="fa fa-clipboard"></i>&nbsp;Summerboard</h1>
+    <h2 class="text-muted">Organize anything, together.</h2>
+    <p><br/></p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <h2>Intuitive</h2>
+        <p>Get organized as fast as you can think. The easy-to-use interface takes no time to learn, and every action is instantaneous, so there’s nothing standing between you and your sweet productive flow.</p>
       </div>
-      <div id="doingList" class="list panel panel-list">
-        <div class="list-header panel-heading"><h3 class="panel-title">Doing</h3></div>
-        <div class="list-body">
-          <div class="list-card-area"></div>
-          <div class="list-add-card">Add a card...</div>
-        </div>
+      <div class="col-lg-4">
+        <h2>Collborative</h2>
+        <p>Summerboard is great alone, but even better with others. Get the whole group onboard in seconds. See their updates in real time. Never ask “Who’s doing what?” again.</p>
       </div>
-      <div id="doneList" class="list panel panel-list">
-        <div class="list-header panel-heading"><h3 class="panel-title">Done</h3></div>
-        <div class="list-body">
-          <div class="list-card-area"></div>
-          <div class="list-add-card">Add a card...</div>
-        </div>
-      </div>
-      <div class="list panel panel-list panel-add-list">
-        <div class="list-body">
-          <div class="list-add-list">Add a list...</div>
-        </div>
+      <div class="col-lg-4">
+        <h2>Adapts to you</h2>
+        <p>More than just a to-do list or a task manager, Summerboard is anything you want it to be—a lesson planner, a community bulletin, a repository for inspiration. We support the way you think, not the other way around.</p>
       </div>
     </div>
   </div>
-  <!-- card composer -->
-  <script type="text/template" id="cardComposerTemplate">
-    <div class="card-composer">
-      <div class="card-labels"></div>
-      <div class="card-detail">
-        <textarea class="card-composer-title"></textarea>
-      </div>
-    </div>
-    <div class="card-control">
-      <button class="btn btn-success btn-add">Add</button>
-      <a class="btn btn-cancel"><i class="fa fa-times"></i></a>
-    </div>
-  </script>
-  <!-- card -->
-  <script type="text/template" id="cardTemplate">
-    <div class="card">
-      <div class="card-labels"></div>
-      <div class="card-detail">
-        <div class="card-title">{{title}}</div>
-        <div class="card-badge btn-toolbar">
-          <button class="btn btn-xs"><i class="fa fa-eye"></i></button>
-          <button class="btn btn-xs"><i class="fa fa-comment"></i></button>
-          <button class="btn btn-xs"><i class="fa fa-list-ul"></i>&nbsp; 1/4</button>
-          <button class="btn btn-xs"><i class="fa fa-paperclip"></i></button>
-        </div>
-      </div>
-    </div>
-  </script>
 </body>
 </html>

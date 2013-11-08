@@ -1,5 +1,9 @@
 var _ = require('lodash');
 
+exports.index = function(req, res){
+  res.render('board', { title: 'summerboard' });
+};
+
 var cards = [{
   id: '9841680c-10e9-4db9-b16f-26ae3c9d8d43',
   title: 'Support Bootstrap v3.0.1',

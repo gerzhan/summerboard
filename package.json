@@ -11,7 +11,10 @@
     "less-middleware": "*",
     "redis": "*",
     "socket.io": "*",
-    "lodash": "*"
+    "lodash": "*",
+    "connect-flash" :"*",
+    "passport": "*",
+    "passport-local": "*"
   },
   "devDependencies": {
     "node-inspector": "*"
