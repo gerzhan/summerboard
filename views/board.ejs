@@ -67,28 +67,7 @@
     </div>
     <!-- board -->
     <div id="board" class="board">
-      <div id="todoList" class="list panel panel-list">
-        <div class="list-header panel-heading"><h3 class="panel-title">To Do</h3></div>
-        <div class="list-body">
-          <div class="list-card-area"></div>
-          <div class="list-card-composer hide"></div>
-          <div class="list-add-card">Add a card...</div>
-        </div>
-      </div>
-      <div id="doingList" class="list panel panel-list">
-        <div class="list-header panel-heading"><h3 class="panel-title">Doing</h3></div>
-        <div class="list-body">
-          <div class="list-card-area"></div>
-          <div class="list-add-card">Add a card...</div>
-        </div>
-      </div>
-      <div id="doneList" class="list panel panel-list">
-        <div class="list-header panel-heading"><h3 class="panel-title">Done</h3></div>
-        <div class="list-body">
-          <div class="list-card-area"></div>
-          <div class="list-add-card">Add a card...</div>
-        </div>
-      </div>
+      <div class="cardlist-area"></div>
       <div class="list panel panel-list panel-add-list">
         <div class="list-body">
           <div class="list-add-list">Add a list...</div>
@@ -96,19 +75,29 @@
       </div>
     </div>
   </div>
-  <!-- card composer -->
-  <script type="text/template" id="cardComposerTemplate">
-    <div class="card-composer">
-      <div class="card-labels"></div>
-      <div class="card-detail">
-        <textarea class="card-composer-title"></textarea>
+  <!-- cardlist -->
+  <script type="text/template" id="cardlistTemplate">
+    <div id="todoList" class="list panel panel-list">
+      <div class="list-header panel-heading"><h3 class="panel-title">{{title}}</h3></div>
+      <div class="list-body">
+        <div class="list-card-area"></div>
+        <div class="list-card-composer hide">
+          <div class="card-composer">
+            <div class="card-labels"></div>
+            <div class="card-detail">
+              <textarea class="card-composer-title"></textarea>
+            </div>
+          </div>
+          <div class="card-control">
+            <button class="btn btn-success btn-add">Add</button>
+            <a class="btn btn-cancel"><i class="fa fa-times"></i></a>
+          </div>
+        </div>
+        <div class="list-add-card">Add a card...</div>
       </div>
     </div>
-    <div class="card-control">
-      <button class="btn btn-success btn-add">Add</button>
-      <a class="btn btn-cancel"><i class="fa fa-times"></i></a>
-    </div>
   </script>
+
   <!-- card -->
   <script type="text/template" id="cardTemplate">
     <div class="card">

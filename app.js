@@ -67,13 +67,18 @@ app.get('/logout', function(req, res) {
 
 // pages
 app.get('/', routes.index);
-app.get('/boards', ensureAuthenticated, board.index);
-app.get('/boards/:id', ensureAuthenticated, board.board);
+app.get('/boards', board.index);
+app.get('/boards/:id', board.board);
 
 // boards
 app.get('/cards', board.listCard);
 app.post('/cards', board.addCard);
 app.put('/cards/:id', board.updateCard);
+
+app.get('/cardlists', board.listCardlist);
+app.post('/cardlists', board.addCardlist);
+app.get('/cardlists/:id', board.updateCardlist);
+
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

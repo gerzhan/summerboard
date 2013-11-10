@@ -1,16 +1,27 @@
 $(function() {
-  // Card Model
+  /*************************
+   * Card
+   *************************/
   var Card = Backbone.Model.extend({
     defaults: function() {
       return {
         title: 'empty',
-        order: cardList.nextOrder(),
+        order: this.collection.nextOrder(),
         done: false
       }
     }
   });
 
-  // Card View
+  var Cards = Backbone.Collection.extend({
+    model: Card,
+    url: '/cards',
+    nextOrder: function() {
+      if (!this.length) return 1;
+      return this.last().get('order') + 1;
+    },
+    comparator: 'order'
+  });
+
   var CardView = Backbone.View.extend({
     tagName: 'div',
     template: $('#cardTemplate').html(),
@@ -33,10 +44,18 @@ $(function() {
     }
   });
 
-  // CardList (List of Cards)
-  var CardList = Backbone.Collection.extend({
-    model: Card,
-    url: '/cards',
+  /*************************
+   * Cardlist
+   *************************/
+  var Cardlist = Backbone.Model.extend({
+    initialize: function() {
+      this.cards = new Cards();
+    }
+  });
+
+  var Cardlists = Backbone.Collection.extend({
+    model: Cardlist,
+    url: '/cardlists',
     nextOrder: function() {
       if (!this.length) return 1;
       return this.last().get('order') + 1;
@@ -44,11 +63,9 @@ $(function() {
     comparator: 'order'
   });
 
-  var cardList = new CardList();
 
-  var CardListView = Backbone.View.extend({
-    el: $('#todoList'),
-    cardComposerTemplate: $('#cardComposerTemplate').html(),
+  var CardlistView = Backbone.View.extend({
+    template: $('#cardlistTemplate').html(),
     events: {
       'updateOrder': 'updateOrder',
       'click .list-add-card': 'showCardComposer',
@@ -58,32 +75,47 @@ $(function() {
       //'focusout .card-composer-title': 'hideCardComposer',
     },
     initialize: function() {
-      var $el = $(this.el);
-      this.composer = $el.find('.list-card-composer');
-      this.composer.append($(this.cardComposerTemplate));
-      this.composerInput = this.composer.find('.card-composer-title');
-      this.addCardBtn = $el.find('.list-add-card');
+      this.listenTo(this.model.cards, 'add', this.addCard);
+      this.listenTo(this.model.cards, 'reset sort', this.repaint);
 
-      this.listenTo(cardList, 'add', this.addCard);
-      this.listenTo(cardList, 'reset sort', this.repaint);
-
-      cardList.fetch({reset: true});
+      this.model.cards.fetch({reset: true});
+    },
+    /* list-card: sortable + draggable */
+    makeSortable: function($cardArea) {
+      $cardArea.sortable({
+        connectWith: '.list-card-area',
+        placeholder: 'card card-placeholder',
+        cursor: 'move',
+        scroll: true,
+        start: function(e, ui) {
+          $(ui.item).addClass('ondrag');
+        },
+        stop: function(e, ui) {
+          ui.item.trigger('drop', ui.item.index());
+          $(ui.item).removeClass('ondrag');
+        }
+      }).disableSelection();
+    },
+    render: function() {
+      this.$el.html(Mustache.to_html(this.template, this.model.toJSON()));
+      this.makeSortable(this.$el.find('.list-card-area'));
+      return this;
     },
     repaint: function() {
       this.$('.list-card-area').empty();
       this.addAllCard();
     },
     addAllCard: function() {
-      cardList.each(this.addCard, this);
+      this.model.cards.each(this.addCard, this);
     },
     addCard: function(card) {
       var cardView = new CardView({model: card});
       this.$('.list-card-area').append(cardView.render().el);
     },
     updateOrder: function(e, model, position) {
-      cardList.remove(model);
+      this.model.cards.remove(model);
 
-      cardList.each(function (model, index) {
+      this.model.cards.each(function (model, index) {
         var order = index;
         if (index >= position)
           order += 1;
@@ -91,27 +123,27 @@ $(function() {
       });            
 
       model.set('order', position);
-      cardList.add(model, {at: position});
-      cardList.each(function(card) { card.save(); });
-      console.log(cardList.pluck('id'), cardList.pluck('order'));
+      this.model.cards.add(model, {at: position});
+      this.model.cards.each(function(card) { card.save(); });
 
       // to update orders on server:
       this.repaint();
     },
     /* cardComposer */
-    showCardComposer: function() {
-      this.composer.removeClass('hide');
-      this.composer.find('textarea').focus();
-      this.addCardBtn.addClass('hide');
+    showCardComposer: function(e) {
+      this.$el.find('.list-card-composer').removeClass('hide');
+      this.$el.find('.card-composer textarea').focus();
+      this.$el.find('.list-add-card').addClass('hide');
     },
-    hideCardComposer: function() {
-      this.composer.addClass('hide');
-      this.addCardBtn.removeClass('hide');
+    hideCardComposer: function(e) {
+      this.$el.find('.list-card-composer').addClass('hide');
+      this.$el.find('.list-add-card').removeClass('hide');
     },
     addCardComposer: function(e) {
-      if (this.composerInput.val()) {
-        cardList.create({title: this.composerInput.val()});
-        this.composerInput.val('').focus();
+      var composerInput = this.$el.find('.card-composer textarea');
+      if (composerInput.val()) {
+        this.model.cards.create({title: composerInput.val()});
+        composerInput.val('').focus();
       }
       e.preventDefault();
     },
@@ -123,28 +155,47 @@ $(function() {
       }
     },
     cancelCardComposer: function(e) {
-      this.composerInput.val('');
+      var composerInput = this.$el.find('.card-composer textarea');
+      composerInput.val('');
       this.hideCardComposer();
       e.preventDefault();
     }
   });
 
-  var board = new CardListView;
-});
-
-/* list-card: sortable + draggable */
-$(document).ready(function() {
-  $('.list .list-card-area').sortable({
-    connectWith: '.list-card-area',
-    placeholder: 'card card-placeholder',
-    cursor: 'move',
-    scroll: true,
-    start: function(e, ui) {
-      $(ui.item).addClass('ondrag');
-    },
-    stop: function(e, ui) {
-      ui.item.trigger('drop', ui.item.index());
-      $(ui.item).removeClass('ondrag');
+  /*************************
+   * Board
+   *************************/
+  var Board = Backbone.Model.extend({
+    initialize: function() {
+      this.cardlists = new Cardlists();
     }
-  }).disableSelection();
+  });
+
+  var BoardView = Backbone.View.extend({
+    initialize: function() {
+      this.listenTo(this.model.cardlists, 'add', this.addCardlist);
+      this.listenTo(this.model.cardlists, 'reset sort', this.repaint);
+
+      this.model.cardlists.fetch({reset: true});
+    },
+
+    repaint: function() {
+      this.$('.cardlist-area').empty();
+      this.addAllCardlist();
+    },
+
+    addAllCardlist: function() {
+      this.model.cardlists.each(this.addCardlist, this);
+    },
+
+    addCardlist: function(cardlist) {
+      var cardlistView = new CardlistView({model: cardlist});
+      this.$('.cardlist-area').append(cardlistView.render().el);
+    }
+  });
+
+  var board = new BoardView({
+    el: $('#board'),
+    model: new Board()
+  });
 });
