@@ -109,7 +109,6 @@ header .gnb.navbar li img.account {
 }
 .content .board .cardlist.panel-list .card-area .card.card-placeholder {
   background-color: #999999;
-  height: 70px;
 }
 .content .board .cardlist.panel-list .cardlist-card-composer {
   margin: 5px;
@@ -167,7 +166,6 @@ header .gnb.navbar li img.account {
 }
 .content .board .cardlist.cardlist-placeholder {
   background-color: #999999;
-  height: 250px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;

@@ -88,6 +88,7 @@ $(function() {
         scroll: true,
         start: function(e, ui) {
           $(ui.item).addClass('ondrag');
+          ui.placeholder.height(ui.item.height());
         },
         stop: function(e, ui) {
           ui.item.trigger('drop', ui.item.index());
@@ -186,6 +187,7 @@ $(function() {
         cursor: 'move',
         start: function(e, ui) {
           $(ui.item).addClass('ondrag');
+          ui.placeholder.height(ui.item.height());
         },
         stop: function(e, ui) {
           ui.item.trigger('drop', ui.item.index());
