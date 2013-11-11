@@ -63,12 +63,11 @@ $(function() {
     comparator: 'order'
   });
 
-
   var CardlistView = Backbone.View.extend({
     template: $('#cardlistTemplate').html(),
     events: {
       'updateOrder': 'updateOrder',
-      'click .list-add-card': 'showCardComposer',
+      'click .cardlist-add-card': 'showCardComposer',
       'click .card-control .btn-add': 'addCardComposer',
       'click .card-control .btn-cancel': 'cancelCardComposer',
       'keydown .card-composer-title': 'keydownCardComposer'
@@ -83,7 +82,7 @@ $(function() {
     /* list-card: sortable + draggable */
     makeSortable: function($cardArea) {
       $cardArea.sortable({
-        connectWith: '.list-card-area',
+        connectWith: '.card-area',
         placeholder: 'card card-placeholder',
         cursor: 'move',
         scroll: true,
@@ -98,11 +97,11 @@ $(function() {
     },
     render: function() {
       this.$el.html(Mustache.to_html(this.template, this.model.toJSON()));
-      this.makeSortable(this.$el.find('.list-card-area'));
+      this.makeSortable(this.$el.find('.card-area'));
       return this;
     },
     repaint: function() {
-      this.$('.list-card-area').empty();
+      this.$('.card-area').empty();
       this.addAllCard();
     },
     addAllCard: function() {
@@ -110,7 +109,7 @@ $(function() {
     },
     addCard: function(card) {
       var cardView = new CardView({model: card});
-      this.$('.list-card-area').append(cardView.render().el);
+      this.$('.card-area').append(cardView.render().el);
     },
     updateOrder: function(e, model, position) {
       this.model.cards.remove(model);
@@ -131,13 +130,13 @@ $(function() {
     },
     /* cardComposer */
     showCardComposer: function(e) {
-      this.$el.find('.list-card-composer').removeClass('hide');
+      this.$el.find('.cardlist-card-composer').removeClass('hide');
       this.$el.find('.card-composer textarea').focus();
-      this.$el.find('.list-add-card').addClass('hide');
+      this.$el.find('.cardlist-add-card').addClass('hide');
     },
     hideCardComposer: function(e) {
-      this.$el.find('.list-card-composer').addClass('hide');
-      this.$el.find('.list-add-card').removeClass('hide');
+      this.$el.find('.cardlist-card-composer').addClass('hide');
+      this.$el.find('.cardlist-add-card').removeClass('hide');
     },
     addCardComposer: function(e) {
       var composerInput = this.$el.find('.card-composer textarea');
@@ -177,17 +176,32 @@ $(function() {
       this.listenTo(this.model.cardlists, 'reset sort', this.repaint);
 
       this.model.cardlists.fetch({reset: true});
+      this.render();
     },
-
+    /* cardlist: sortable + draggable */
+    makeSortable: function($cardlistArea) {
+      $cardlistArea.sortable({
+        handle: 'div.cardlist-header',
+        cursor: 'move',
+        start: function(e, ui) {
+          $(ui.item).addClass('ondrag');
+        },
+        stop: function(e, ui) {
+          ui.item.trigger('drop', ui.item.index());
+          $(ui.item).removeClass('ondrag');
+        }
+      }).disableSelection();
+    },
+    render: function() {
+      this.makeSortable(this.$el.find('.cardlist-area'));
+    },
     repaint: function() {
       this.$('.cardlist-area').empty();
       this.addAllCardlist();
     },
-
     addAllCardlist: function() {
       this.model.cardlists.each(this.addCardlist, this);
     },
-
     addCardlist: function(cardlist) {
       var cardlistView = new CardlistView({model: cardlist});
       this.$('.cardlist-area').append(cardlistView.render().el);

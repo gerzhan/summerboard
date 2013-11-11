@@ -61,9 +61,12 @@ header {
       .rotation(5deg);
     }
 
-    .list {
-      @list-bg: #ddd;
+    .cardlist-area>div {
       float: left;
+    }
+
+    .cardlist {
+      @list-bg: #ddd;
       position: relative;
       margin-left: 10px;
       min-width: 300px;
@@ -72,8 +75,13 @@ header {
         background-color: @list-bg;
         border: none;
 
-        /* list-card-area */
-        .list-card-area {
+        /* cardlist-header */
+        .cardlist-header {
+          cursor: pointer;
+        }
+
+        /* card-area */
+        .card-area {
           min-height: 30px;
           margin: 5px;
 
@@ -110,7 +118,7 @@ header {
           }
 
         }
-        .list-card-composer {
+        .cardlist-card-composer {
           margin: 5px;
           /* card-composer */
           .card-composer {
@@ -144,8 +152,8 @@ header {
 
         }
 
-        /* list-add-card btn and list-add-list btn */
-        .list-add-card, .list-add-list {
+        /* cardlist-add-card btn and list-add-list btn */
+        .cardlist-add-card, .cardlist-add-list {
           padding: 5px;
           color: gray;
           &.hide {
@@ -159,6 +167,7 @@ header {
         }
       }
       &.panel-add-list {
+        float: left;
         opacity: 0.6;
       }
     }
