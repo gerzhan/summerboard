@@ -92,10 +92,6 @@ header {
             border: 1px solid gray;
             background-color: white;
             margin-bottom: 10px;
-          }
-
-          /* card */
-          .card {
             .card-title {
               margin: 10px;
             }
@@ -169,6 +165,11 @@ header {
       &.panel-add-list {
         float: left;
         opacity: 0.6;
+      }
+      &.cardlist-placeholder {
+        background-color: lighten(@accent, 60%);
+        height: 250px;
+        .rounded(5px);
       }
     }
   }

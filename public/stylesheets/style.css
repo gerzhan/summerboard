@@ -84,8 +84,6 @@ header .gnb.navbar li img.account {
   margin: 5px;
   /* common card and card-composer */
 
-  /* card */
-
 }
 .content .board .cardlist.panel-list .card-area .card {
   width: 100%;
@@ -166,4 +164,11 @@ header .gnb.navbar li img.account {
 .content .board .cardlist.panel-add-list {
   float: left;
   opacity: 0.6;
+}
+.content .board .cardlist.cardlist-placeholder {
+  background-color: #999999;
+  height: 250px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }

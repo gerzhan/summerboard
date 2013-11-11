@@ -182,6 +182,7 @@ $(function() {
     makeSortable: function($cardlistArea) {
       $cardlistArea.sortable({
         handle: 'div.cardlist-header',
+        placeholder: 'cardlist cardlist-placeholder',
         cursor: 'move',
         start: function(e, ui) {
           $(ui.item).addClass('ondrag');
