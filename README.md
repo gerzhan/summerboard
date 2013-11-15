@@ -1,13 +1,10 @@
 summerboard
 ===========
 
-Trello Clone Project
-Trello Tech stacks: http://blog.fogcreek.com/the-trello-tech-stack/
-Trello Architecture: http://prezi.com/skunatcrkp5m/trello-architecture/
+Trello Clone Project.
 
-### Why Summerboard?
-
-Trello is cool management tool. Summerboard is a clone of Trello in opensource.
+* Trello Tech stacks: http://blog.fogcreek.com/the-trello-tech-stack/
+* Trello Architecture: http://prezi.com/skunatcrkp5m/trello-architecture/
 
 ## Run summerboard
 Summerboard uses open source
