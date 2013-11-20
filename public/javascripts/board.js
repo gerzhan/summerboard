@@ -1,4 +1,4 @@
-$(function() {
+require([], function() {
   /*************************
    * Card
    *************************/
@@ -24,7 +24,7 @@ $(function() {
 
   var CardView = Backbone.View.extend({
     tagName: 'div',
-    template: $('#cardTemplate').html(),
+    template: Handlebars.compile($('#cardTemplate').html()),
     events: { 
       'drop': 'drop'
     },
@@ -36,7 +36,7 @@ $(function() {
       this.$el.trigger('updateOrder', [this.model, index]);
     },
     render: function() {
-      this.$el.html(Mustache.to_html(this.template, this.model.toJSON()));
+      this.$el.html(this.template(this.model.toJSON()));
       return this;
     },
     clear: function() {
@@ -64,7 +64,7 @@ $(function() {
   });
 
   var CardlistView = Backbone.View.extend({
-    template: $('#cardlistTemplate').html(),
+    template: Handlebars.compile( $('#cardlistTemplate').html()),
     events: {
       'updateOrder': 'updateOrder',
       'click .cardlist-add-card': 'showCardComposer',
@@ -97,7 +97,7 @@ $(function() {
       }).disableSelection();
     },
     render: function() {
-      this.$el.html(Mustache.to_html(this.template, this.model.toJSON()));
+      this.$el.html(this.template(this.model.toJSON()));
       this.makeSortable(this.$el.find('.card-area'));
       return this;
     },

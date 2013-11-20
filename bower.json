@@ -3,11 +3,14 @@
   "version": "0.0.1",
   "dependencies": {
     "jquery": "*",
-    "lodash": "*",
+    "jquery-ui": "*",
+    "underscore": "*",
+    "requirejs": "*",
     "backbone": "*",
+    "marionette": "*",
     "bootstrap": "*",
     "font-awesome": "*",
     "less-elements": "*",
-    "mustache": "*"
+    "handlebars": "*"
   }
 }
