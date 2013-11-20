@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -44,21 +43,13 @@ if ('development' == app.get('env')) {
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
 //
-//   curl -v -d "username=bob&password=secret" http://127.0.0.1:3000/login
-app.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
-  function(req, res) {
-    res.redirect('/boards');
+//   curl -v -d "username=alan&password=1234" http://127.0.0.1:3000/login
+app.post('/login', passport.authenticate('local', {
+  failureRedirect: '/login',
+  failureFlash: true
+}), function(req, res) {
+  res.redirect('/boards');
 });
-
-// Simple route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed.  Otherwise, the user will be redirected to the
-//   login page.
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/')
-}
 
 app.get('/logout', function(req, res) {
   req.logout();
@@ -67,7 +58,7 @@ app.get('/logout', function(req, res) {
 
 // pages
 app.get('/', routes.index);
-app.get('/boards', board.index);
+app.get('/boards', auth.ensureAuthenticated, board.index);
 app.get('/boards/:id', board.board);
 
 // boards
